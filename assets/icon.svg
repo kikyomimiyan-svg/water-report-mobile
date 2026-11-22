@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#1769e0"/>
+  <path d="M256 82c-58 79-119 150-119 233 0 66 53 119 119 119s119-53 119-119c0-83-61-154-119-233z" fill="#fff"/>
+  <text x="256" y="340" text-anchor="middle" font-size="120" font-family="sans-serif" font-weight="700" fill="#1769e0">水</text>
+</svg>
