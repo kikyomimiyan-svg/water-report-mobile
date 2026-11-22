@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f7fb" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="水务日报" />
+  <title>水务运行日报｜手机版</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">水务内部工具</div>
+        <h1>水务运行日报</h1>
+        <p>手机直接生成 Excel、日报图片和微信文字版。数据仅在当前浏览器本地处理。</p>
+      </div>
+      <div class="status-stack">
+        <span id="networkBadge" class="badge">在线</span>
+        <span class="privacy-badge">本地处理</span>
+      </div>
+    </header>
+
+    <section id="installCard" class="install-card hidden">
+      <div>
+        <strong>建议添加到手机主屏幕</strong>
+        <p id="installHint">以后像 App 一样直接打开。</p>
+      </div>
+      <button id="installBtn" class="ghost small">安装/查看方法</button>
+    </section>
+
+    <section class="card compact-card">
+      <div class="section-head">
+        <div>
+          <h2>月报模板</h2>
+          <p class="muted">默认内置 2026 年 11 月模板。以后每月首次选择新模板后，会自动保存在本机浏览器。</p>
+        </div>
+        <span id="templateStatus" class="template-pill">内置模板</span>
+      </div>
+      <div class="file-row">
+        <label class="file-button">
+          <input id="templateFile" type="file" accept=".xls,.xlsx" />
+          选择本月 Excel
+        </label>
+        <button id="clearTemplateBtn" class="ghost">恢复内置模板</button>
+      </div>
+      <div id="templateName" class="template-name">水务公司运行日报表（2026年11月）.xls</div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <h2>粘贴微信群原文</h2>
+          <p class="muted">一水厂、二水厂、南园、北园整段复制即可，不需要删姓名或时间。</p>
+        </div>
+        <button id="clearTextBtn" class="ghost">清空</button>
+      </div>
+      <textarea id="rawText" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="在这里粘贴当天微信群完整报送内容……"></textarea>
+      <div class="actions mobile-actions">
+        <button id="pasteBtn" class="secondary">粘贴剪贴板</button>
+        <button id="parseBtn" class="secondary">校验数据</button>
+        <button id="generateBtn" class="primary">生成日报</button>
+      </div>
+      <div id="message" class="message hidden"></div>
+    </section>
+
+    <section id="previewCard" class="card hidden">
+      <div class="section-head">
+        <h2>数据校验</h2>
+        <span class="ok-pill">解析通过</span>
+      </div>
+      <div id="dataPreview" class="preview-grid"></div>
+      <div id="qualityPreview" class="quality-preview"></div>
+      <div id="warningBox"></div>
+    </section>
+
+    <section id="resultCard" class="card hidden">
+      <div class="result-head">
+        <div>
+          <h2>生成结果</h2>
+          <p class="muted">三个产物已在手机本地生成。</p>
+        </div>
+        <span class="success-pill">完成</span>
+      </div>
+
+      <div class="download-grid">
+        <button id="downloadExcel" class="download-btn">下载 Excel</button>
+        <button id="shareExcel" class="download-btn soft">分享 Excel</button>
+        <button id="downloadPng" class="download-btn">保存日报图片</button>
+        <button id="sharePng" class="download-btn soft">分享日报图片</button>
+        <button id="copyText" class="download-btn">复制文字版</button>
+        <button id="downloadTxt" class="download-btn soft">下载 TXT</button>
+      </div>
+
+      <h3>日报图片</h3>
+      <p class="mobile-tip">iPhone 也可以长按图片保存到相册。</p>
+      <div class="image-preview-box">
+        <img id="pngPreview" alt="水务运行日报预览" />
+      </div>
+
+      <h3>微信文字版</h3>
+      <pre id="textOutput" class="text-output"></pre>
+    </section>
+  </main>
+
+  <!-- 仅用于生成 PNG，不直接展示。保持标准日报版式。 -->
+  <div id="captureHost" aria-hidden="true">
+    <div id="reportCapture" class="report-sheet">
+      <div class="report-title">水务公司运行日报</div>
+      <div class="report-date">
+        <span id="dataDateText"></span>
+        <span id="compileDateText"></span>
+      </div>
+      <div class="report-source">数据来源：供水公司、污水处理公司</div>
+      <div class="report-row supply-row">
+        <div class="row-label">日供水量</div>
+        <div id="supplyText" class="row-content"></div>
+      </div>
+      <div class="report-row wastewater-row">
+        <div class="row-label">污水处理</div>
+        <div id="wastewaterText" class="row-content wastewater-content"></div>
+      </div>
+      <div id="footerText" class="report-footer"></div>
+    </div>
+  </div>
+
+  <div id="installModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-title">添加到主屏幕</div>
+      <div id="installSteps" class="install-steps"></div>
+      <button id="closeInstallModal" class="primary full">知道了</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

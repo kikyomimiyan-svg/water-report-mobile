@@ -1,0 +1,20 @@
+{
+  "name": "水务运行日报",
+  "short_name": "水务日报",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6fa",
+  "theme_color": "#f5f7fb",
+  "description": "纯前端水务运行日报生成工具，微信数据仅在浏览器本地处理。",
+  "lang": "zh-CN",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

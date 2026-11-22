@@ -1,0 +1,105 @@
+:root {
+  --bg: #f4f6fa;
+  --card: #ffffff;
+  --ink: #171a21;
+  --muted: #68707d;
+  --line: #d9dee8;
+  --accent: #1769e0;
+  --accent-soft: #eaf2ff;
+  --success: #087443;
+  --warn-bg: #fff7e6;
+  --warn-ink: #8a5500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); -webkit-tap-highlight-color: transparent; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .58; cursor: default; }
+.app-shell { width: min(1080px, calc(100% - 26px)); margin: 18px auto 52px; }
+.hero { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin: 6px 2px 18px; }
+.eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; margin-bottom: 5px; letter-spacing: .08em; }
+.hero h1 { margin:0 0 7px; font-size:28px; letter-spacing:-.02em; }
+.hero p { margin:0; color:var(--muted); line-height:1.55; max-width:720px; }
+.status-stack { display:flex; flex-direction:column; align-items:flex-end; gap:7px; }
+.badge, .privacy-badge, .template-pill, .ok-pill, .success-pill { border-radius:999px; padding:5px 10px; font-size:12px; white-space:nowrap; }
+.badge { background:#111827; color:#fff; }
+.badge.offline { background:#8a3f00; }
+.privacy-badge { color:#17633b; background:#eaf8f0; }
+.template-pill { color:#315886; background:#edf4fd; }
+.ok-pill, .success-pill { color:var(--success); background:#eaf8f0; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:19px; margin:13px 0; box-shadow:0 6px 24px rgba(26,35,50,.04); }
+.compact-card { padding-bottom:16px; }
+.card h2 { margin:0 0 8px; font-size:19px; }
+.card h3 { margin:23px 0 9px; font-size:16px; }
+.section-head, .result-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.muted { color:var(--muted); font-size:14px; line-height:1.55; margin:0; }
+.file-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.file-button { display:inline-flex; padding:10px 14px; border-radius:10px; background:#eef3fb; color:#1f3f68; font-weight:650; }
+.file-button input { display:none; }
+.template-name { color:var(--muted); font-size:13px; margin-top:9px; word-break:break-all; }
+textarea { width:100%; min-height:330px; resize:vertical; border:1px solid #cfd6e2; border-radius:12px; padding:14px; line-height:1.65; background:#fbfcfe; margin-top:12px; font-size:15px; }
+textarea:focus { outline:2px solid #b9d4ff; border-color:#7aaeff; }
+.actions { display:flex; gap:9px; margin-top:12px; flex-wrap:wrap; }
+button { border:0; border-radius:10px; padding:11px 15px; font-weight:650; min-height:42px; }
+button.primary { background:var(--accent); color:#fff; }
+button.secondary { background:#eef1f6; color:#222; }
+button.ghost { background:transparent; color:#4f5968; border:1px solid #d9dee8; }
+button.small { min-height:36px; padding:8px 11px; font-size:13px; }
+button.full { width:100%; }
+.message { margin-top:12px; border-radius:10px; padding:11px 13px; line-height:1.55; font-size:14px; }
+.message.error { background:#fff0f0; color:#a02020; }
+.message.ok { background:#ecf8f1; color:#17633b; }
+.hidden { display:none !important; }
+.install-card { background:#eef5ff; border:1px solid #cfe0fa; border-radius:14px; padding:13px 15px; display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.install-card p { margin:4px 0 0; color:#50657f; font-size:13px; }
+.preview-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; margin-top:12px; }
+.metric { background:#f7f9fc; border:1px solid #e4e8ef; border-radius:12px; padding:11px; }
+.metric span { display:block; color:var(--muted); font-size:12px; margin-bottom:5px; }
+.metric strong { font-size:17px; }
+.quality-preview { margin-top:12px; display:flex; flex-wrap:wrap; gap:7px; }
+.quality-tag { background:#f3f5f8; color:#394352; border-radius:999px; padding:6px 9px; font-size:12px; }
+.quality-tag.exceed-tag { background:#fff0f0; color:#b11919; }
+.warning { background:var(--warn-bg); color:var(--warn-ink); border-radius:10px; padding:10px 12px; margin-top:10px; line-height:1.55; font-size:13px; }
+.download-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin-top:14px; }
+.download-btn { background:#111827; color:#fff; }
+.download-btn.soft { background:#edf1f6; color:#222; }
+.mobile-tip { color:var(--muted); font-size:13px; margin:0 0 9px; }
+.image-preview-box { width:100%; overflow:hidden; border:1px solid #e1e5eb; border-radius:10px; background:#edf0f4; }
+#pngPreview { display:block; width:100%; height:auto; background:#fff; }
+.text-output { white-space:pre-wrap; background:#f7f9fc; border:1px solid #e2e6ed; border-radius:10px; padding:14px; line-height:1.72; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:14px; }
+
+/* PNG 标准日报：按领导现有图片版式固定宽度，正文按数据自动增高。 */
+#captureHost { position:fixed; left:-10000px; top:0; width:1532px; z-index:-1; pointer-events:none; opacity:1; }
+.report-sheet { width:1532px; background:#fff; color:#000; border:1px solid #000; font-family:"Songti SC","STSong","SimSun","宋体",serif; font-size:16px; line-height:1.42; }
+.report-title { height:48px; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #000; font-family:"Heiti SC","PingFang SC","Microsoft YaHei",sans-serif; font-weight:600; font-size:27px; }
+.report-date { min-height:44px; display:flex; justify-content:space-between; align-items:center; padding:0 8px; border-bottom:1px solid #000; white-space:nowrap; font-size:16px; }
+.report-source { min-height:40px; display:flex; align-items:center; padding:0 8px; border-bottom:1px solid #000; font-size:16px; }
+.report-row { display:grid; grid-template-columns:96px 1fr; border-bottom:1px solid #000; }
+.row-label { display:flex; align-items:center; justify-content:center; text-align:center; border-right:1px solid #000; font-family:"Songti SC","STSong","SimSun","宋体",serif; font-size:16px; }
+.row-content { padding:10px 10px; white-space:pre-wrap; }
+.supply-row .row-content { min-height:104px; display:flex; flex-direction:column; justify-content:center; }
+.wastewater-content { min-height:520px; line-height:1.43; }
+.report-footer { min-height:36px; display:flex; align-items:center; padding:4px 6px; background:#ffff00; font-family:"STFangsong","FangSong","仿宋",serif; font-size:16px; }
+.exceed { color:#ff0000; }
+
+.modal { position:fixed; inset:0; background:rgba(17,24,39,.42); display:flex; align-items:flex-end; justify-content:center; padding:16px; z-index:100; }
+.modal-card { width:min(520px,100%); background:#fff; border-radius:18px; padding:19px; box-shadow:0 20px 50px rgba(0,0,0,.18); }
+.modal-title { font-size:19px; font-weight:700; margin-bottom:10px; }
+.install-steps { color:#3c4655; line-height:1.75; font-size:14px; margin-bottom:15px; }
+
+@media (max-width: 760px) {
+  .app-shell { width:calc(100% - 16px); margin-top:8px; padding-bottom:env(safe-area-inset-bottom); }
+  .hero { margin:8px 5px 13px; }
+  .hero h1 { font-size:23px; }
+  .hero p { font-size:13px; }
+  .card { padding:14px; border-radius:14px; }
+  .card h2 { font-size:17px; }
+  .preview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .download-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .mobile-actions { display:grid; grid-template-columns:1fr 1fr; }
+  .mobile-actions .primary { grid-column:1 / -1; font-size:16px; min-height:48px; }
+  textarea { min-height:390px; font-size:16px; }
+  .install-card { margin-left:0; margin-right:0; }
+}
